@@ -32,10 +32,10 @@ if DJANGO_ENV == 'local':
     CORS_ALLOW_ALL_ORIGINS = True
     
 else:
-    # База данных для продакшена (MySQL)
+    # База данных для продакшена (PostgreSQL)
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': config('DB_NAME'),
             'USER': config('DB_USER'),
             'PASSWORD': config('DB_PASSWORD'),
@@ -51,9 +51,20 @@ else:
     ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
     CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='', cast=Csv())
 
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = config("DEBUG", default=True, cast=bool)
+    # ALLOWED_HOSTS = [
+    #     'yourdomain.com',  # Ваш основной домен (если используется)
+    #     'www.yourdomain.com',  # Если есть www
+    #     '127.0.0.1',  # Локальный хост для тестов
+    #     'localhost',  # Локальный доступ через localhost
+    #     'render.com',  # Домен платформы Render (или другой хостинг)
+    #     'your-production-domain.com',  # Пример домена продакшн-сервера
+    # ]
+    
+    # CORS_ALLOWED_ORIGINS = [
+    #     'http://localhost:3000',  # Локальный фронт
+    #     'http://127.0.0.1:3000',  # Для локального тестирования с фронтендом
+    #     'https://your-production-domain.com',  # Пример для продакшн домена
+    # ]
 
 # ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1,localhost", cast=lambda v: v.split(","))
 # ALLOWED_HOSTS = [
@@ -162,7 +173,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"  # Путь к статическим файлам
+# В продакшн-среде необходимо указать директорию, куда будут собираться файлы
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Например, создайте папку "staticfiles" для собранной статики
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
