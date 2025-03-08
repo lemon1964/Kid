@@ -31,3 +31,6 @@ stripe==4.0.2
 yookassa==3.5.0
 pyngrok==7.2.3
 
+gunicorn==20.1.0
+
+
