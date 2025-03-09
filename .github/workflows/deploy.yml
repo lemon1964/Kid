@@ -52,8 +52,7 @@ jobs:
           export DB_NAME=${{ secrets.DB_NAME }}
           echo "DEBUG: Printing DATABASE_URL"
           echo "DATABASE_URL=postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@${{ secrets.DB_HOST }}:${{ secrets.DB_PORT }}/${{ secrets.DB_NAME }}"
-          
+
       # Запуск развертывания на Render
       - name: Trigger Render deployment
-        run: |
-          curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
