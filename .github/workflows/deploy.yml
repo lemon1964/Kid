@@ -30,6 +30,7 @@ jobs:
       # Выполним миграции
       - name: Run migrations
         run: |
+          export DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
           python manage.py migrate
 
       # Запуск развертывания на Render
