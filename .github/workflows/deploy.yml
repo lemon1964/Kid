@@ -55,4 +55,7 @@ jobs:
 
       # Запуск развертывания на Render
       - name: Trigger Render deployment
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+        run: |
+          echo "Triggering Render deployment"
+          curl -v https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      
