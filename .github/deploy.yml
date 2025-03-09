@@ -1,0 +1,39 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - main  # Развертывание будет происходить при каждом пуше в ветку main
+  workflow_dispatch:  # Позволяет запускать его вручную
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Проверим код из репозитория
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Настройка Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Устанавливаем зависимости
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Выполним миграции
+      - name: Run migrations
+        run: |
+          export DATABASE_URL=postgres://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME  # Если база использует переменные окружения
+          python manage.py migrate
+
+      # Запуск развертывания на Render
+      - name: Trigger Render deployment
+        run: |
+          curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
