@@ -30,28 +30,7 @@ jobs:
       # Выполним миграции
       - name: Run migrations
         run: |
-          export DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
-          export DJANGO_ENV=${{ secrets.DJANGO_ENV }}
-          export DEBUG=${{ secrets.DEBUG }}
-          export ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}
-          export CORS_ALLOWED_ORIGINS=${{ secrets.CORS_ALLOWED_ORIGINS }}
-          export BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}
-          export EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }}
-          export EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }}
-          export STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}
-          export STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}
-          export STRIPE_API_VERSION=${{ secrets.STRIPE_API_VERSION }}
-          export STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}
-          export SHOP_ID=${{ secrets.SHOP_ID }}
-          export KASSA_SECRET_KEY=${{ secrets.KASSA_SECRET_KEY }}
-          export BASE_URL=${{ secrets.BASE_URL }}
-          export DB_USER=${{ secrets.DB_USER }}
-          export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          export DB_HOST=${{ secrets.DB_HOST }}
-          export DB_PORT=${{ secrets.DB_PORT }}
-          export DB_NAME=${{ secrets.DB_NAME }}
-          echo "DEBUG: Printing DATABASE_URL"
-
+          python manage.py migrate
 
       # Запуск развертывания на Render
       - name: Trigger Render deployment
