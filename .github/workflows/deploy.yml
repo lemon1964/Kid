@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: '3.10'
 
       # Устанавливаем зависимости и выполняем установку psycopg2-binary
       - name: Install dependencies
@@ -56,6 +56,7 @@ jobs:
           export DB_HOST=${{ secrets.DB_HOST }}
           export DB_PORT=${{ secrets.DB_PORT }}
           export DB_NAME=${{ secrets.DB_NAME }}
+          export DATABASE_URL="postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@${{ secrets.DB_HOST }}:${{ secrets.DB_PORT }}/${{ secrets.DB_NAME }}"
           python manage.py migrate
 
       # Запуск развертывания на Render
