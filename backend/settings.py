@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("DJANGO_SECRET_KEY")
 
-# Определение окружения (local или production)
+# Определение окружения (local или production)н
 DJANGO_ENV = config('DJANGO_ENV')
 
 if DJANGO_ENV == 'local':
