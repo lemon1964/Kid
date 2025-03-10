@@ -57,5 +57,5 @@ jobs:
       - name: Trigger Render deployment
         run: |
           echo "Triggering Render deployment"
-          curl -v https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-      
+          curl -X POST "https://api.render.com/v1/services/srv-cv5o4ijqf0us73ept2cg/deploys" \
+            -H "Authorization: Bearer rnd_ONIpH6mmFoSkzQbCK4qgMIyQcfl4"
