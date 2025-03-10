@@ -53,7 +53,7 @@ jobs:
           echo "DEBUG: Printing DATABASE_URL"
           echo "DATABASE_URL=postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@${{ secrets.DB_HOST }}:${{ secrets.DB_PORT }}/${{ secrets.DB_NAME }}"
           python -m pip show psycopg2-binary
-          pip uninstall psycopg2 psycopg2-binary
+          pip uninstall -y psycopg2 psycopg2-binary
           python manage.py migrate
 
       # Запуск развертывания на Render
