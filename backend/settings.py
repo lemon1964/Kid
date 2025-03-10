@@ -32,7 +32,7 @@ if DJANGO_ENV == 'local':
     CORS_ALLOW_ALL_ORIGINS = True
     
 else:
-    # База данных для продакшена (PostgreSQL)
+    # База данных для продакшена (PostgreSQL)и
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
