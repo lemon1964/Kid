@@ -49,8 +49,8 @@ jobs:
       - name: Run migrations
         run: python manage.py migrate
 
-      - name: Load fixture data
-        run: python manage.py loaddata quiz_app/fixtures/quizzes.json
+      # - name: Load fixture data
+      #   run: python manage.py loaddata quiz_app/fixtures/quizzes.json
 
       - name: Trigger Render deployment
         run: |
