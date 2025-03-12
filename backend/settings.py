@@ -12,6 +12,10 @@ SECRET_KEY = config("DJANGO_SECRET_KEY")
 # Определение окружения (local или production)
 DJANGO_ENV = config('DJANGO_ENV')
 
+STATIC_URL = "/static/"  # Путь к статическим файлам
+# В продакшн-среде необходимо указать директорию, куда будут собираться файлы
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Например, создайте папку "staticfiles" для собранной статики
+
 if DJANGO_ENV == 'local':
     # Локальная база данных (SQLite)
     DATABASES = {
@@ -33,6 +37,7 @@ if DJANGO_ENV == 'local':
 ]
     CORS_ALLOW_ALL_ORIGINS = True
     
+    MEDIA_ROOT = BASE_DIR / "media"
     MEDIA_URL = "/media/"
     
 else:
@@ -59,6 +64,7 @@ else:
     ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
     CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='', cast=Csv())
     
+    MEDIA_ROOT = STATIC_ROOT / "media"
     MEDIA_URL = '/static/media/'
 
     # ALLOWED_HOSTS = [
@@ -183,14 +189,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = "/static/"  # Путь к статическим файлам
-# В продакшн-среде необходимо указать директорию, куда будут собираться файлы
-STATIC_ROOT = BASE_DIR / "staticfiles"  # Например, создайте папку "staticfiles" для собранной статики
-
-
-# MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 # ✅ Разрешаем отдачу `.svg` (если есть ограничения)
 # import mimetypes
