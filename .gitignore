@@ -31,3 +31,9 @@ venv/
 # Ignore coverage reports if you're using a tool like coverage.py
 .coverage
 .coverage.*
+
+# добавляем лишние теперь папки
+media/
+!staticfiles/media/
+
+
