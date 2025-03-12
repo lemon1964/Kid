@@ -66,6 +66,7 @@ else:
     
     MEDIA_ROOT = STATIC_ROOT / "media"
     MEDIA_URL = '/static/media/'
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
     # ALLOWED_HOSTS = [
     #     'yourdomain.com',  # Ваш основной домен (если используется)

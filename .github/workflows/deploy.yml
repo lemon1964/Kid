@@ -41,29 +41,20 @@ jobs:
         with:
           python-version: '3.10'
 
-      # - name: Install dependencies
-      #   run: |
-      #     python -m pip install --upgrade pip
-      #     pip install -U -r requirements.txt 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U -r requirements.txt 
 
-      # - name: Run migrations
-      #   run: python manage.py migrate
+      - name: Run migrations
+        run: python manage.py migrate
 
       - name: Check media file existence
         run: |
           curl -I https://kid-wlsf.onrender.com/static/media/musics/main.mp3
 
-      - name: Check media file existence
+      - name: Trigger Render deployment
         run: |
-          curl -I https://kid-wlsf.onrender.com/staticfiles/media/musics/main.mp3
-
-
-
-      # - name: Load fixture data
-      #   run: python manage.py loaddata quiz_app/fixtures/quizzes.json
-
-      # - name: Trigger Render deployment
-      #   run: |
-      #     curl -X POST "https://api.render.com/v1/services/srv-${{ secrets.RENDER_SERVICE_ID }}/deploys" \
-      #       -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+          curl -X POST "https://api.render.com/v1/services/srv-${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
   
