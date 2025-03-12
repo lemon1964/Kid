@@ -49,9 +49,9 @@ jobs:
       - name: Run migrations
         run: python manage.py migrate
 
-      - name: Load fixture data for users
-        run: python manage.py loaddata auth_app/fixtures/users.json
-        
+      # - name: Load fixture data for users
+      #   run: python manage.py loaddata auth_app/fixtures/users.json
+
       - name: Trigger Render deployment
         run: |
           curl -X POST "https://api.render.com/v1/services/srv-${{ secrets.RENDER_SERVICE_ID }}/deploys" \
