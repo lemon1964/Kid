@@ -14,7 +14,7 @@ DJANGO_ENV = config('DJANGO_ENV')
 
 STATIC_URL = "/static/"  # Путь к статическим файлам
 # В продакшн-среде необходимо указать директорию, куда будут собираться файлы
-STATIC_ROOT = BASE_DIR / "staticfiles"  # Например, создайте папку "staticfiles" для собранной статики
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 if DJANGO_ENV == 'local':
     # Локальная база данных (SQLite)
