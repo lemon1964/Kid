@@ -53,6 +53,10 @@ jobs:
           export DATABASE_URL="postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@${{ secrets.DB_HOST }}:${{ secrets.DB_PORT }}/${{ secrets.DB_NAME }}"
           python manage.py migrate
 
+      # Загрузка фикстур (например, пользователей)
+      - name: Load fixture data for users
+        run: python manage.py loaddata auth_app/fixtures/users.json
+
       # Запуск развертывания на Render
       - name: Trigger Render deployment
         run: |

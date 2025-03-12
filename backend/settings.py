@@ -33,6 +33,8 @@ if DJANGO_ENV == 'local':
 ]
     CORS_ALLOW_ALL_ORIGINS = True
     
+    MEDIA_URL = "/media/"
+    
 else:
     # База данных для продакшена (PostgreSQL)и
     DATABASES = {
@@ -56,6 +58,8 @@ else:
 
     ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
     CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='', cast=Csv())
+    
+    MEDIA_URL = '/static/media/'
 
     # ALLOWED_HOSTS = [
     #     'yourdomain.com',  # Ваш основной домен (если используется)
@@ -184,7 +188,8 @@ STATIC_URL = "/static/"  # Путь к статическим файлам
 # В продакшн-среде необходимо указать директорию, куда будут собираться файлы
 STATIC_ROOT = BASE_DIR / "staticfiles"  # Например, создайте папку "staticfiles" для собранной статики
 
-MEDIA_URL = '/media/'
+
+# MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ✅ Разрешаем отдачу `.svg` (если есть ограничения)

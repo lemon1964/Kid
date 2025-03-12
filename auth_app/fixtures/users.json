@@ -1,0 +1,112 @@
+[
+{
+  "model": "auth_app.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$0aykO1rMMkLPpC4UQWhNPT$1mlX64XZTocx5Z3SUv0VcBRYn0s9n1gIja06GFreyaQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "lemon.design",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-25T14:41:08.566Z",
+    "email": "lemon.design@mail.ru",
+    "name": "lemon",
+    "provider": "credentials",
+    "newsletter": true,
+    "points": 0,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth_app.user",
+  "pk": 15,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$QCQh6JvFwoEnVvCUn0MtlK$H/QZVGhUDDkhZH3Sme/IlB3aDPZv6zclwZJAxxdsIT4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "korvin757",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-26T11:04:05.932Z",
+    "email": "korvin757@yandex.ru",
+    "name": "tester",
+    "provider": "credentials",
+    "newsletter": true,
+    "points": 43,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth_app.user",
+  "pk": 18,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Kd1guchpPmw76oQaXCnjo0$Kjfmdihgj2n9CQqOQtNbRw0WbtJ9bzRkh4SjBHYmsLk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "usermhan",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-26T12:11:02.499Z",
+    "email": "usermhan@yandex.ru",
+    "name": "usermhan",
+    "provider": "credentials",
+    "newsletter": true,
+    "points": 829,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth_app.user",
+  "pk": 19,
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "113477598651266925800",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-26T13:25:32.191Z",
+    "email": "sv444444@gmail.com",
+    "name": "ISM ISM",
+    "provider": "google",
+    "newsletter": true,
+    "points": 2329,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth_app.user",
+  "pk": 20,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$vv3NA1xOir3mwtUQyYDMKu$PJcQ502eQ2QKZuDxYvsNvcXKlqtIJqGMibXjYCT91iY=",
+    "last_login": "2025-03-12T15:01:06Z",
+    "is_superuser": true,
+    "username": "lemon-super",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-12-29T17:22:14Z",
+    "email": "lemon@lemon.com",
+    "name": "",
+    "provider": "credentials",
+    "newsletter": true,
+    "points": 0,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
