@@ -49,6 +49,11 @@ jobs:
       - name: Run migrations
         run: python manage.py migrate
 
+      - name: Check media file existence
+        run: |
+          curl -I https://kid-wlsf.onrender.com/static/media/musics/main.mp3
+
+
       # - name: Load fixture data
       #   run: python manage.py loaddata quiz_app/fixtures/quizzes.json
 
