@@ -7,7 +7,7 @@ class DragDropTaskAdmin(admin.ModelAdmin):
     list_display = ('name', 'unique_id', 'replacement', 'author', 'created_at', 'slug', 'background_preview')
     filter_horizontal = ("next_task",)  # ✅ Позволяет выбирать задачи в админке
     search_fields = ('slug',)
-    exclude = ('slug',)
+    # exclude = ('slug',)
     # exclude = ('background_image', 'slug')
     
     # fields = ('unique_id', 'description','background_image', 'music')
