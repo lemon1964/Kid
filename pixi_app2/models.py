@@ -21,9 +21,6 @@ class PixiTaskType(models.Model):
         
     def __str__(self):
         return self.get_type_display()
-    
-    def get_prefix(self):
-        return "3"  # Пикси
 
 
 class PixiTask(AbstractBaseModel):
@@ -54,6 +51,9 @@ class PixiTask(AbstractBaseModel):
         
     def __str__(self):
         return f"{self.title} ({self.get_task_mode_display()})"
+    
+    def get_prefix(self):
+        return "3"  # Пикси
 
 
 class PixiObject(models.Model):
