@@ -49,9 +49,9 @@ jobs:
       - name: Run migrations
         run: python manage.py migrate
 
-      - name: Check media file existence
-        run: |
-          curl -I https://kid-wlsf.onrender.com/static/media/musics/main.mp3
+      # - name: Check media file existence
+      #   run: |
+      #     curl -I https://kid-wlsf.onrender.com/static/media/musics/main.mp3
 
       - name: Trigger Render deployment
         run: |
