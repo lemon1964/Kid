@@ -33,7 +33,7 @@ if DJANGO_ENV == 'local':
     ALLOWED_HOSTS = [
     '127.0.0.1',  # Локальный хост для тестов
     'localhost',  # Чтобы поддерживать локальный доступ через localhost
-    '24ce-46-101-80-16.ngrok-free.app',  # Ваш ngrok URL для публичных запросов
+    '24ce-46-101-80-16.ngrok-free.app',  # Ваш ngrok URL для публичных запросовr
 ]
     CORS_ALLOW_ALL_ORIGINS = True
     
