@@ -1,7 +1,5 @@
 from pathlib import Path
 from decouple import config, Csv
-# import os
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,7 +15,6 @@ STATIC_URL = "/static/"  # Путь к статическим файлам
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 if DJANGO_ENV == 'local':
-    # Локальная база данных (SQLite)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -41,10 +38,8 @@ if DJANGO_ENV == 'local':
     MEDIA_URL = "/media/"
     
 else:
-    # База данных для продакшена (PostgreSQL)и
     DATABASES = {
         'default': {
-            # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': config('DB_NAME'),
             'USER': config('DB_USER'),
@@ -67,28 +62,6 @@ else:
     MEDIA_ROOT = STATIC_ROOT / "media"
     MEDIA_URL = '/static/media/'
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-
-    # ALLOWED_HOSTS = [
-    #     'yourdomain.com',  # Ваш основной домен (если используется)
-    #     'www.yourdomain.com',  # Если есть www
-    #     '127.0.0.1',  # Локальный хост для тестов
-    #     'localhost',  # Локальный доступ через localhost
-    #     'render.com',  # Домен платформы Render (или другой хостинг)
-    #     'your-production-domain.com',  # Пример домена продакшн-сервера
-    # ]
-    
-    # CORS_ALLOWED_ORIGINS = [
-    #     'http://localhost:3000',  # Локальный фронт
-    #     'http://127.0.0.1:3000',  # Для локального тестирования с фронтендом
-    #     'https://your-production-domain.com',  # Пример для продакшн домена
-    # ]
-
-# ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1,localhost", cast=lambda v: v.split(","))
-# ALLOWED_HOSTS = [
-#     '127.0.0.1',  # Локальный хост для тестов
-#     'localhost',  # Чтобы поддерживать локальный доступ через localhost
-#     '24ce-46-101-80-16.ngrok-free.app',  # Ваш ngrok URL для публичных запросов
-# ]
 
 INSTALLED_APPS = [
     'django.contrib.sites',  # Обязательно для django-allauth
@@ -151,21 +124,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -174,10 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 
@@ -188,16 +142,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 # ✅ Разрешаем отдачу `.svg` (если есть ограничения)
 # import mimetypes
 # mimetypes.add_type("image/svg+xml", ".svg", True)
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -254,14 +201,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',  # allauth
 ]
 
-# разрешаем временно для приема вэбхука от stripe
-# CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",  # Ваш фронтенд
-#     "http://127.0.0.1:3000",
-# ]
-# разрешить запросы с любого домена
-
 CORS_ALLOW_HEADERS = [
     "content-type",
     "authorization",
@@ -281,10 +220,6 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 DJANGO_SETTINGS_MODULE = {
     'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}/',
 }
-
-# # для работы с ngrok
-# CSRF_COOKIE_SECURE = False  # Для тестирования на локальном сервере
-# CSRF_COOKIE_HTTPONLY = False  # Для разрешения работы с куки в браузере
 
 # Stripe settings
 STRIPE_PUBLISHABLE_KEY = config("STRIPE_PUBLISHABLE_KEY")
