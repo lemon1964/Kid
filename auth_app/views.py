@@ -14,6 +14,7 @@ from rest_framework.permissions import AllowAny
 
 from allauth.account.models import EmailAddress
 from rest_framework_simplejwt.exceptions import AuthenticationFailed
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from dj_rest_auth.views import PasswordResetView
 from .serializers import CustomPasswordResetSerializer
@@ -29,6 +30,7 @@ from django.contrib.auth.tokens import default_token_generator
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 
+from backend import settings
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -114,7 +116,7 @@ def add_user_to_brevo_helper(email):
         raise Exception(f"Failed to add user {email} to Brevo: {response.content}")
 
 
-
+# verify-email/
 class CustomRegisterView(RegisterView):
     serializer_class = CustomRegisterSerializer
     
@@ -122,10 +124,10 @@ class CustomRegisterView(RegisterView):
         user = serializer.save(self.request)
         
         # Добавляем пользователя в Brevo
-        try:
-            add_user_to_brevo_helper(user.email)
-        except Exception as e:
-            print(f"Error adding user {user.email} to Brevo: {str(e)}")
+        # try:
+        #     add_user_to_brevo_helper(user.email)
+        # except Exception as e:
+        #     print(f"Error adding user {user.email} to Brevo: {str(e)}")
 
         return user
 
@@ -165,8 +167,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             'user': user_data  # Возвращаем данные пользователя
         }, status=status.HTTP_200_OK)
   
-
-from rest_framework_simplejwt.tokens import RefreshToken
 
 class CustomOAuthRegisterOrLoginView(APIView):
     permission_classes = [AllowAny]  # Разрешаем доступ без токена
@@ -228,17 +228,16 @@ class CustomOAuthRegisterOrLoginView(APIView):
 
 class CustomPasswordResetConfirmView(APIView):
     permission_classes = [AllowAny]  # Разрешаем доступ без токена
-
+    
     def get(self, request, uidb64, token, *args, **kwargs):
-        # Формируем URL для фронтенда
-        frontend_url = f"http://localhost:3000/auth/password-reset/{uidb64}/{token}/"
-        # print(f"Redirecting to frontend URL: {frontend_url}")
+        frontend_url = f"{settings.FRONT_URL}/auth/password-reset/{uidb64}/{token}/"
+        print(f"Redirecting to frontend URL: {frontend_url}")
         return HttpResponseRedirect(frontend_url)
  
     
 class CustomPasswordResetView(PasswordResetView):
     serializer_class = CustomPasswordResetSerializer
-
+    
     def get_serializer_context(self):
         """
         Добавляет в контекст объект запроса (request).
@@ -300,7 +299,8 @@ class CustomVerifyEmailView(APIView):
                 email_address.verified = True
                 email_address.save()
 
-                return redirect("http://localhost:3000/verification-success")
+                return redirect(f"{settings.FRONT_URL}/verification-success")
+                # return redirect("http://localhost:3000/verification-success")
             else:
                 return Response({"message": "User is already activated."}, status=200)
         else:

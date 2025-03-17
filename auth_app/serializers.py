@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from allauth.account.utils import send_email_confirmation
 
 
+from backend import settings
 from brevo.views import send_email_via_brevo
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
@@ -48,22 +49,42 @@ class CustomRegisterSerializer(RegisterSerializer):
         # Генерация ссылки подтверждения
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)
-        domain = "localhost:8000"  # Укажите свой порт
-        confirmation_url = f"http://{domain}{reverse('custom_verify_email')}?uid={uid}&token={token}"
+        # domain = settings.DOMAIN # Укажите свой порт
+        # domain = "localhost:8000"  # Укажите свой порт
+        confirmation_url = f"http://{settings.DOMAIN}{reverse('custom_verify_email')}?uid={uid}&token={token}"
+        # confirmation_url = f"http://{domain}{reverse('custom_verify_email')}?uid={uid}&token={token}"
         # domain = get_current_site(request).domain
         # confirmation_url = f"http://{domain}{reverse('custom_verify_email')}?uid={uid}&token={token}"
-
+                   
         # Отправка письма через Django SMTP
+       # Отправка письма через Django SMTP с HTML-содержимым
+        subject = "Email Confirmation"
+        message = f"Please confirm your email using the following link: {confirmation_url}"
+        html_message = f"""
+        <html>
+            <body>
+                <p>Please confirm your email using the following link:</p>
+                <p><a href="{confirmation_url}">Click here to confirm your email</a></p>
+            </body>
+        </html>
+        """
         send_mail(
-            subject="Email Confirmation",
-            message=f"Please confirm your email using the following link: {confirmation_url}",
-            from_email="your-email@example.com",
+            subject,
+            message,
+            from_email={settings.EMAIL_HOST_USER},  # Укажите свой адрес отправителя EMAIL_HOST_USER
             recipient_list=[user.email],
+            html_message=html_message  # Передаем HTML-сообщение для кликабельной ссылки
         )
+        # send_mail(
+        #     subject="Email Confirmation",
+        #     message=f"Please confirm your email using the following link: {confirmation_url}",
+        #     from_email="sv444444@gmail.com",
+        #     recipient_list=[user.email],
+        # )
 
         # Отправка письма "Please confirm your email" через Brevo
-        time.sleep(5)  # Задержка отправки, чтобы Brevo успел зарегистрировать пользователя
-        send_email_via_brevo(user.email, template_id=15)
+        # time.sleep(5)  # Задержка отправки, чтобы Brevo успел зарегистрировать пользователя
+        # send_email_via_brevo(user.email, template_id=15)
 
         return user
 
@@ -86,8 +107,8 @@ class CustomPasswordResetSerializer(PasswordResetSerializer):
         request = self.context.get('request')
         uid = self.context.get('uid', '')  # Теперь uid должен быть в контексте
         token = self.context.get('token', '')  # Аналогично
-        reset_url = f"http://localhost:3000/auth/password-reset/{uid}/{token}/"
-        
+        reset_url = f"{settings.FRONT_URL}/auth/password-reset/{uid}/{token}/"
+                
         return {
             "subject": "Password Reset",
             "extra_email_context": {"reset_url": reset_url},

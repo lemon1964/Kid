@@ -37,6 +37,9 @@ if DJANGO_ENV == 'local':
     MEDIA_ROOT = BASE_DIR / "media"
     MEDIA_URL = "/media/"
     
+    FRONT_URL = "http://localhost:3000"
+    DOMAIN = "localhost:8000"
+    
 else:
     DATABASES = {
         'default': {
@@ -62,6 +65,9 @@ else:
     MEDIA_ROOT = STATIC_ROOT / "media"
     MEDIA_URL = '/static/media/'
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    
+    FRONT_URL = 'https://kid-front.onrender.com'
+    DOMAIN = 'kid-wlsf.onrender.com'
 
 INSTALLED_APPS = [
     'django.contrib.sites',  # Обязательно для django-allauth
@@ -163,7 +169,8 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'auth_app.User'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# Настройка почтового сервера Для Gmail
+
+# # Настройка почтового сервера Для Gmail
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
