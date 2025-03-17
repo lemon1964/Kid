@@ -17,13 +17,6 @@ class AbstractBaseModel(models.Model):
         else:
             super().save(*args, **kwargs)
 
-
-    # def save(self, *args, **kwargs):
-    #     if not self.unique_id:
-    #         prefix = self.get_prefix()
-    #         self.unique_id = f"{prefix}{self.id:03d}"
-    #     super().save(*args, **kwargs)
-
     def get_prefix(self):
         raise NotImplementedError("Метод должен быть реализован в наследниках")
 

@@ -35,12 +35,6 @@ class User(AbstractUser):
     # Указываем, что логин происходит через email
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []  # Поля, которые обязательно запрашиваются при создании superuser
-
-    # # Добавляем related_name для предотвращения конфликта с группами и правами
-    # groups = models.ManyToManyField(
-    #     'auth.Group', related_name='auth_app_users', blank=True)
-    # user_permissions = models.ManyToManyField(
-    #     'auth.Permission', related_name='auth_app_users', blank=True)
     
     objects = CustomUserManager()  # Подключаем кастомный менеджер
     def __str__(self):
