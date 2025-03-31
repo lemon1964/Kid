@@ -2,7 +2,7 @@
 .env
 
 # Ignore SQLite database
-db.sqlite3
+# db.sqlite3
 
 # Ignore all __pycache__ directories
 **/__pycache__/
